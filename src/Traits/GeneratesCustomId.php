@@ -12,13 +12,33 @@ use TimYouri\CustomId\Exceptions\MaxAttemptsException;
  */
 trait GeneratesCustomId
 {
+    /**
+     * Determines if the generated id should be unique.
+     * 
+     * @var bool
+     */
     protected $uniqueCustomId = true;
 
+    /**
+     * Defines the maximum amount of attemts for validating uniqueness before inserting.
+     * 
+     * @var int
+     */
     protected $customIdAttempts = 10;
 
-    protected $customIdLength = 12;
-
+    /**
+     * Determines if you are allowed to change the id.
+     * 
+     * @var bool
+     */
     protected $lockCustomId = true;
+    
+    /**
+     * Config parameter for defining the length of the id in the default id generation method.
+     * 
+     * @var int
+     */
+    protected $customIdLength = 12;
 
     /**
      * Used by Eloquent to get if the primary key is auto increment value.
@@ -43,10 +63,11 @@ trait GeneratesCustomId
             $model->incrementing = false;
 
             if (!$model->getKey()) {
-                $currentId = (string) $model->generateId(1);
+                $attempts = 1;
+
+                $currentId = $model->generateId($attempts);
 
                 if ($model->uniqueCustomId) {
-                    $attempts = 1;
 
                     // Make sure generated id is unique in database.
                     while ($model::where($model->getKeyName(), $currentId)->exists()) {
@@ -59,7 +80,7 @@ trait GeneratesCustomId
                             throw new MaxAttemptsException($attempts);
                         }
 
-                        $currentId = (string) $model->generateId($attempts);
+                        $currentId = $model->generateId($attempts);
                     }
                 }
 
@@ -84,8 +105,8 @@ trait GeneratesCustomId
      * @param int $attempts Number of attempts to generate a unique id.
      * @return string Ggenerated string to be used as id.
      */
-    public function generateId(int $attempts = 1)
+    protected function generateId(int $attempts)
     {
-        return Str::random($this->customIdLength);
+        return (string) Str::random($this->customIdLength);
     }
 }
