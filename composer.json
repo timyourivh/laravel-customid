@@ -1,12 +1,16 @@
 {
-    "name": "jamesh/laravel-uuid",
-    "description": "Eloquent UUID Trait for Laravel 6 and above.",
+    "name": "timyouri/laravel-customid",
+    "description": "Eloquent Custom ID Generation Trait for Laravel 6 and above.",
     "type": "plugin",
     "license": "MIT",
     "authors": [
         {
             "name": "James Hemery",
             "email": "hello@james-hemery.pro"
+        },
+        {
+            "name": "Tim van Herwijnen",
+            "email": "timyourivh@gmail.com"
         }
     ],
     "minimum-stability": "stable",
@@ -21,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Jamesh\\Uuid\\": "src"
+            "TimYouri\\CustomId\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Jamesh\\Uuid\\Test\\": "tests"
+            "TimYouri\\CustomId\\Test\\": "tests"
         }
     },
     "scripts": {
