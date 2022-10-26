@@ -1,6 +1,6 @@
 <?php
 
-namespace Jamesh\Uuid\Test;
+namespace TimYouri\CustomId\Test;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;

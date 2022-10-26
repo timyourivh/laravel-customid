@@ -1,24 +1,22 @@
 <?php
 
-namespace Jamesh\Uuid\Test;
+namespace TimYouri\CustomId\Test;
 
-use Illuminate\Support\Str;
-use Jamesh\Uuid\Test\Models\Category;
-use Jamesh\Uuid\Test\Models\Post;
-use Jamesh\Uuid\Test\Models\Tag;
+use TimYouri\CustomId\Test\Models\Category;
+use TimYouri\CustomId\Test\Models\Post;
+use TimYouri\CustomId\Test\Models\Tag;
 
 class HasUuidTest extends TestCase
 {
-
-    const UUID_REGEX = '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i';
+    const POST_REGEX = '/^custom_post_id_[A-Za-z0-9]{8}$/i';
 
     public function test_create()
     {
         $post = Post::create(['title' => 'My awesome post']);
-        $this->assertMatchesRegularExpression(self::UUID_REGEX, $post->id);
+        $this->assertMatchesRegularExpression(self::POST_REGEX, $post->id);
 
         $found = Post::first();
-        $this->assertMatchesRegularExpression(self::UUID_REGEX, $found->id);
+        $this->assertMatchesRegularExpression(self::POST_REGEX, $found->id);
     }
 
     public function test_find()
@@ -92,7 +90,7 @@ class HasUuidTest extends TestCase
         $post = Post::create(['title' => 'My awesome tutorial']);
 
         $original_id = $post->id;
-        $new_id = (string)Str::uuid();
+        $new_id = 'new_mallicious_id';
 
         $post->id = $new_id;
         $post->save();
@@ -117,7 +115,7 @@ class HasUuidTest extends TestCase
 
         $this->assertNotEmpty($found->id);
         $this->assertNotNull($found->id);
-        $this->assertMatchesRegularExpression(self::UUID_REGEX, $found->id);
+        $this->assertMatchesRegularExpression(self::POST_REGEX, $found->id);
     }
 
     public function test_create_with_empty_id()
@@ -132,7 +130,37 @@ class HasUuidTest extends TestCase
 
             $this->assertNotEmpty($found->id);
             $this->assertNotNull($found->id);
-            $this->assertMatchesRegularExpression(self::UUID_REGEX, $found->id);
+            $this->assertMatchesRegularExpression(self::POST_REGEX, $found->id);
+        });
+    }
+
+    public function test_save_new_with_prefilled_id()
+    {
+        $post = new Post();
+        $post->id = 'test';
+        $post->title = 'My awesome tutorial';
+        $post->save();
+
+        $found = Post::first();
+
+        $this->assertNotEmpty($found->id);
+        $this->assertNotNull($found->id);
+        $this->assertEquals('test', $found->id);
+    }
+
+    public function test_create_with_prefilled_id()
+    {
+        Post::unguarded(function () {
+            Post::create([
+                'id' => 'test',
+                'title' => 'My awesome tutorial'
+            ]);
+
+            $found = Post::first();
+
+            $this->assertNotEmpty($found->id);
+            $this->assertNotNull($found->id);
+            $this->assertEquals('test', $found->id);
         });
     }
 }

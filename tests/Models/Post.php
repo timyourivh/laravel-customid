@@ -1,13 +1,14 @@
 <?php
 
-namespace Jamesh\Uuid\Test\Models;
+namespace TimYouri\CustomId\Test\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Jamesh\Uuid\HasUuid;
+use TimYouri\CustomId\Traits\GeneratesCustomId;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
-    use HasUuid;
+    use GeneratesCustomId;
 
     protected $guarded = [];
 
@@ -17,5 +18,10 @@ class Post extends Model
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
+    }
+
+    protected function generateId(int $attempts)
+    {
+        return 'custom_post_id_' . Str::random(8);
     }
 }
