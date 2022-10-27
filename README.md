@@ -1,8 +1,8 @@
 # laravel-customid
 Eloquent Custom ID Generation Trait for Laravel 5.7 and above.
 
-<!-- [![Github Actions](https://img.shields.io/github/workflow/status/JamesHemery/laravel-uuid/Continuous%20Integration.svg?style=for-the-badge)](https://github.com/JamesHemery/laravel-uuid/actions?query=workflow%3A%22Continuous+Integration%22)
-[![Total Downloads](https://img.shields.io/packagist/dt/jamesh/laravel-uuid.svg?style=for-the-badge)](https://packagist.org/packages/jamesh/laravel-uuid) -->
+<!-- [![Github Actions](https://img.shields.io/github/workflow/status/JamesHemery/laravel-uuid/Continuous%20Integration.svg?style=for-the-badge)](https://github.com/JamesHemery/laravel-uuid/actions?query=workflow%3A%22Continuous+Integration%22) -->
+[![Total Downloads](https://img.shields.io/packagist/dt/timyouri/laravel-customid.svg?style=for-the-badge)](https://packagist.org/packages/timyouri/laravel-customid)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://raw.githubusercontent.com/JamesHemery/laravel-uuid/master/LICENSE)
 
 A simple trait that allows you to generate and lock a unique custom generated id.
@@ -64,7 +64,8 @@ class User extends Model
     // Determines if the generated id should be unique
     protected $uniqueCustomId = true; 
 
-    // Defines the maximum amount of attemts for validating uniqueness.
+    // Defines the maximum amount of attemts for validating uniqueness before inserting.
+    // If exceeded, it will throw an exception.
     protected $customIdAttempts = 10; 
 
     // Determines if you are allowed to change the id.

@@ -54,6 +54,7 @@ trait GeneratesCustomId
     /**
      * Add behavior to creating and saving Eloquent events.
      * 
+     * @throws MaxAttemptsException
      * @return void
      */
     public static function bootGeneratesCustomId()
