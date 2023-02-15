@@ -17,28 +17,28 @@ trait GeneratesCustomId
      * 
      * @var bool
      */
-    protected $uniqueCustomId = true;
+    protected bool $uniqueCustomId = true;
 
     /**
      * Defines the maximum amount of attemts for validating uniqueness before inserting.
      * 
      * @var int
      */
-    protected $customIdAttempts = 10;
+    protected int $customIdAttempts = 10;
 
     /**
      * Determines if you are allowed to change the id.
      * 
      * @var bool
      */
-    protected $lockCustomId = true;
+    protected bool $lockCustomId = true;
     
     /**
      * Config parameter for defining the length of the id in the default id generation method.
      * 
      * @var int
      */
-    protected $customIdLength = 12;
+    protected int $customIdLength = 12;
 
     /**
      * Used by Eloquent to get if the primary key is auto increment value.
@@ -59,7 +59,7 @@ trait GeneratesCustomId
      */
     public static function bootGeneratesCustomId()
     {
-        // Create a UUID to the model if it does not have one
+        // When creating, generate a custom ID by calling the ->generateId() method.
         static::creating(function (Model $model) {
             $model->incrementing = false;
 
