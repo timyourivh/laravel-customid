@@ -1,3 +1,7 @@
+<!-- [![Github Actions](https://img.shields.io/github/workflow/status/JamesHemery/laravel-uuid/Continuous%20Integration.svg?style=for-the-badge)](https://github.com/JamesHemery/laravel-uuid/actions?query=workflow%3A%22Continuous+Integration%22) -->
+[![Total Downloads](https://img.shields.io/packagist/dt/timyouri/laravel-customid.svg?style=for-the-badge)](https://packagist.org/packages/timyouri/laravel-customid)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://raw.githubusercontent.com/JamesHemery/laravel-uuid/master/LICENSE)
+
 # laravel-customid
 
 > **Note**
@@ -5,10 +9,6 @@
 > laravel now supports using UUID's and custom ID's by default. Check out [their documentation](https://laravel.com/docs/9.x/eloquent#uuid-and-ulid-keys) to see if it fits your needs.
 
 Eloquent custom ID generation trait for Laravel 6 and above.
-
-<!-- [![Github Actions](https://img.shields.io/github/workflow/status/JamesHemery/laravel-uuid/Continuous%20Integration.svg?style=for-the-badge)](https://github.com/JamesHemery/laravel-uuid/actions?query=workflow%3A%22Continuous+Integration%22) -->
-[![Total Downloads](https://img.shields.io/packagist/dt/timyouri/laravel-customid.svg?style=for-the-badge)](https://packagist.org/packages/timyouri/laravel-customid)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://raw.githubusercontent.com/JamesHemery/laravel-uuid/master/LICENSE)
 
 A simple trait that allows you to generate and lock a (unique) custom generated id.
 
